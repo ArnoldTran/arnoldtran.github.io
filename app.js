@@ -83,6 +83,13 @@ map.on('load', async () => {
 // ====== High Risk Sites ======
 const riskListEl = document.getElementById('risk-list');
 
+function getRiskColor(risk) {
+  // Example: low risk = green, medium = yellow, high = red
+  if (risk >= 80) return '#e74c3c';      // high risk = red
+  if (risk >= 50) return '#f1c40f';      // medium risk = yellow
+  return '#2ecc71';                       // low risk = green
+}
+
 function updateHighRiskList() {
   const wards = wardsGeoJson.features
     .map(f => ({ 
@@ -92,9 +99,15 @@ function updateHighRiskList() {
     .sort((a, b) => b.risk - a.risk);
 
   riskListEl.innerHTML = wards
-    .map(w => `<li>Ward ${w.name} — Risk: ${w.risk}</li>`)
+    .map(w => `
+      <div class="ward-card" style="background-color: ${getRiskColor(w.risk)};">
+        <div class="ward-name">WARD ${w.name}</div>
+        <div class="ward-risk">${w.risk}</div>
+      </div>
+    `)
     .join('');
 }
+
 
 // ====== Generate Weekly Plan ======
 document.getElementById('generate-plan').addEventListener('click', () => {
@@ -105,12 +118,24 @@ document.getElementById('generate-plan').addEventListener('click', () => {
 
   const assignments = Array.from({ length: crewsCount }, () => []);
   wards.forEach((ward, idx) => {
-    assignments[idx % crewsCount].push(`${ward.name} (Risk: ${ward.risk})`);
+    assignments[idx % crewsCount].push({
+      ward: ward.name,
+      risk: ward.risk
+    });
   });
 
-  const html = assignments.map((crew, i) =>
-    `<strong>Crew ${i + 1}:</strong> ${crew.join(', ')}`
-  ).join('<br>');
+  const html = assignments.map((crew, i) => {
+    return `<div class="crew-plan">
+      <strong>Crew ${i + 1}:</strong>
+      ${crew.map(w => {
+        let color = w.risk > 66 ? 'red' : w.risk > 33 ? 'orange' : 'green';
+        return `<div class="ward-line">
+                  <span class="risk-bar" style="background-color:${color}"></span>
+                  Ward ${w.ward} — Risk: ${w.risk}
+                </div>`;
+      }).join('')}
+    </div>`;
+  }).join('<br>');
 
   document.getElementById('plan-output').innerHTML = html;
 });
