@@ -1,0 +1,56 @@
+/* Minimal styling so you can deploy without a build step.
+   Feel free to replace with Tailwind or your design system later. */
+
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent:#0ea5a4;
+  --muted:#94a3b8;
+  --glass: rgba(255,255,255,0.03);
+  --radius:12px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body,#map{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#071127 0%, #071927 100%);
+  color:#e6eef6;
+  font-size:15px;
+  line-height:1.4;
+}
+
+/* Layout */
+.container{max-width:1200px;margin:18px auto;padding:12px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.topbar h1{font-size:18px;margin:0}
+.top-actions{display:flex;gap:8px;align-items:center}
+
+.main-grid{display:grid;grid-template-columns:1fr 360px;gap:12px;align-items:start}
+.card{background:var(--card);border-radius:var(--radius);padding:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+.map-card{padding:8px}
+.map{width:100%;height:600px;border-radius:10px;overflow:hidden}
+
+.side-card{display:flex;flex-direction:column;gap:12px;height:600px;overflow:auto}
+.panel{background:var(--glass);padding:10px;border-radius:8px}
+
+.risk-list{list-style:none;padding:0;margin:6px 0;max-height:160px;overflow:auto}
+.risk-item{display:flex;justify-content:space-between;align-items:center;padding:6px;border-radius:6px;margin-bottom:6px;background:rgba(255,255,255,0.02)}
+.risk-item strong{font-size:13px}
+.risk-score{font-weight:700;padding:6px 8px;border-radius:6px;background:linear-gradient(90deg,#f97316,#ef4444);color:white;font-size:13px}
+
+.plan-output{min-height:80px;background:rgba(255,255,255,0.02);padding:8px;border-radius:6px;overflow:auto}
+
+.chat-window{height:180px;background:rgba(0,0,0,0.15);padding:8px;border-radius:6px;overflow:auto;margin-bottom:8px}
+.chat-msg{margin:6px 0;padding:6px;border-radius:6px}
+.chat-msg.user{background:#0b6b6b;text-align:right}
+.chat-msg.bot{background:rgba(255,255,255,0.03)}
+
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.btn{background:var(--accent);border:none;padding:8px 10px;border-radius:8px;color:#042022;cursor:pointer}
+.btn:hover{opacity:0.95}
+.muted{color:var(--muted)}
+
+.footer{text-align:center;margin-top:10px;color:var(--muted)}
