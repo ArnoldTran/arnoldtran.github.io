@@ -1,73 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>SmartStorm AI — Predictive Planner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>CSS Intensive Examples</title>
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- MapLibre GL JS (open-source map) -->
-  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
-  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
-
-  <!-- Simple icon font (optional) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <header class="topbar">
-      <h1>SmartStorm AI — Predictive Planner (Demo)</h1>
-      <div class="top-actions">
-        <!-- Planner controls -->
-        <label>Crews: <input id="crew-count" type="number" min="1" max="10" value="2" /></label>
-        <button id="generate-plan" class="btn">Generate Weekly Plan</button>
+
+  <h1>CSS Intensive Examples</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#selectors">1. Selectors & Specificity</a>
+    <a href="#boxmodel">2. Box Model</a>
+    <a href="#positioning">3. Positioning</a>
+    <a href="#flexbox">4. Flexbox</a>
+    <a href="#grid">5. Grid</a>
+    <a href="#responsive">6. Responsive</a>
+  </nav>
+
+  <!-- 1. Selectors -->
+  <section id="selectors">
+    <h2>1. Cascade, Specificity, and Selectors</h2>
+    <p>Normal paragraph.</p>
+    <p class="highlight">This one has a class.</p>
+    <p id="important">This one has an ID.</p>
+    <a href="https://example.com">Normal link</a><br>
+    <a href="https://example.com" target="_blank">Opens in new tab</a>
+  </section>
+
+  <!-- 2. Box Model -->
+  <section id="boxmodel">
+    <h2>2. Box Model + Visual Styling</h2>
+    <div class="card">
+      <h3>Profile Card</h3>
+      <p>This card uses margin, padding, borders, border-radius, background, and font styling.</p>
+    </div>
+  </section>
+
+  <!-- 3. Positioning -->
+  <section id="positioning">
+    <h2>3. Positioning Systems</h2>
+    <header class="sticky">Sticky Header</header>
+    <div class="content">
+      <div class="box">
+        Outer Box
+        <div class="inner">Absolutely Positioned</div>
       </div>
-    </header>
+      Scroll down to see the footer stay in place!
+    </div>
+    <footer class="fixed">Fixed Footer</footer>
+  </section>
 
-    <main class="main-grid">
-      <!-- LEFT: Map -->
-      <section class="card map-card">
-        <div id="map" class="map"></div>
-      </section>
+  <!-- 4. Flexbox -->
+  <section id="flexbox">
+    <h2>4. Flexbox</h2>
+    <nav class="flex">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="flex-container">
+      <div class="flex-item">Box 1</div>
+      <div class="flex-item">Box 2</div>
+      <div class="flex-item">Box 3</div>
+      <div class="flex-item">Box 4</div>
+    </div>
+  </section>
 
-      <!-- RIGHT: Side panel (risk list & chatbot) -->
-      <aside class="card side-card">
-        <div class="panel">
-          <h2>High Risk Sites</h2>
-          <ul id="risk-list" class="risk-list"></ul>
-        </div>
+  <!-- 5. Grid -->
+  <section id="grid">
+    <h2>5. Grid</h2>
+    <div class="grid">
+      <div class="cell">1</div>
+      <div class="cell">2</div>
+      <div class="cell">3</div>
+      <div class="cell">4</div>
+      <div class="cell">5</div>
+      <div class="cell">6</div>
+    </div>
+  </section>
 
-        <div class="panel">
-          <h2>Planner</h2>
-          <div id="plan-output" class="plan-output">No plan yet — click "Generate Weekly Plan".</div>
-        </div>
+  <!-- 6. Responsive -->
+  <section id="responsive">
+    <h2>6. Responsive Design</h2>
+    <div class="cards">
+      <div class="card-resp">Card A</div>
+      <div class="card-resp">Card B</div>
+      <div class="card-resp">Card C</div>
+    </div>
+  </section>
 
-        <div class="panel">
-          <h2>Citizen Chatbot</h2>
-          <!-- Simple chat UI: messages shown here -->
-          <div id="chat-window" class="chat-window"></div>
-
-          <!-- Input to send a message -->
-          <div class="chat-input">
-            <input id="chat-text" type="text" placeholder="Describe the problem (e.g. standing water at 5th & K)" />
-            <button id="chat-send" class="btn">Send</button>
-          </div>
-
-          <small class="muted">
-            The chatbot stores reports locally and will POST to a backend if you set <code>BACKEND_URL</code> in <code>app.js</code>.
-          </small>
-        </div>
-      </aside>
-    </main>
-
-    <footer class="footer">
-      <small>Demo frontend — connect a backend to enable real APIs, predictive model, and routing.</small>
-    </footer>
-  </div>
-
-  <!-- App script -->
-  <script src="app.js"></script>
 </body>
 </html>
