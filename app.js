@@ -3,7 +3,7 @@ const chatWindow = document.getElementById('chat-window');
 const chatInput = document.getElementById('chat-text');
 const chatSend = document.getElementById('chat-send');
 
-// Change this to your backend URL
+// Backend URL
 const BACKEND_URL = "http://127.0.0.1:8000/api/chat";
 
 function addMessage(message, sender) {
@@ -20,6 +20,13 @@ async function sendMessage() {
   addMessage(msg, 'user');
   chatInput.value = '';
 
+  // Check for ward number and add plan
+  const wardNumber = extractWardNumber(msg);
+  if (wardNumber) {
+    addCrewPlanForWard(wardNumber);
+    addMessage(`Added plan for Ward ${wardNumber}`, 'worker');
+  }
+
   try {
     const response = await fetch(BACKEND_URL, {
       method: 'POST',
@@ -35,6 +42,25 @@ async function sendMessage() {
 
 chatSend.addEventListener('click', sendMessage);
 chatInput.addEventListener('keypress', e => { if(e.key==='Enter') sendMessage(); });
+
+// ==== Chatbot Planner ====
+// Extract the first ward number mentioned in text
+function extractWardNumber(text) {
+  const match = text.match(/ward\s*(\d+)/i);
+  return match ? match[1] : null;
+}
+
+// Add a crew plan to the planner for a specific ward
+function addCrewPlanForWard(wardNumber) {
+  const planOutput = document.getElementById('plan-output');
+
+  const plan = document.createElement('div');
+  plan.classList.add('crew-plan');
+  plan.innerHTML = `<strong>Ward ${wardNumber}:</strong> Added via chatbot input`;
+  
+  planOutput.appendChild(plan);
+}
+
 
 // ====== Map Initialization ======
 const map = new maplibregl.Map({
