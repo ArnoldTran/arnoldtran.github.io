@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartStorm AI — Demo</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- MapLibre GL JS (open-source map) -->
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+
+  <!-- Simple icon font (optional) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <h1>SmartStorm AI — Predictive Planner (Demo)</h1>
+      <div class="top-actions">
+        <!-- Planner controls -->
+        <label>Crews: <input id="crew-count" type="number" min="1" max="10" value="2" /></label>
+        <button id="generate-plan" class="btn">Generate Weekly Plan</button>
+      </div>
+    </header>
+
+    <main class="main-grid">
+      <!-- LEFT: Map -->
+      <section class="card map-card">
+        <div id="map" class="map"></div>
+      </section>
+
+      <!-- RIGHT: Side panel (risk list & chatbot) -->
+      <aside class="card side-card">
+        <div class="panel">
+          <h2>High Risk Sites</h2>
+          <ul id="risk-list" class="risk-list"></ul>
+        </div>
+
+        <div class="panel">
+          <h2>Planner</h2>
+          <div id="plan-output" class="plan-output">No plan yet — click "Generate Weekly Plan".</div>
+        </div>
+
+        <div class="panel">
+          <h2>Citizen Chatbot</h2>
+          <!-- Simple chat UI: messages shown here -->
+          <div id="chat-window" class="chat-window"></div>
+
+          <!-- Input to send a message -->
+          <div class="chat-input">
+            <input id="chat-text" type="text" placeholder="Describe the problem (e.g. standing water at 5th & K)" />
+            <button id="chat-send" class="btn">Send</button>
+          </div>
+
+          <small class="muted">
+            The chatbot stores reports locally and will POST to a backend if you set <code>BACKEND_URL</code> in <code>app.js</code>.
+          </small>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <small>Demo frontend — connect a backend to enable real APIs, predictive model, and routing.</small>
+    </footer>
+  </div>
+
+  <!-- App script -->
+  <script src="app.js"></script>
+</body>
+</html>
